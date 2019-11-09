@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Mopo as Mopol;
+
 
 class HomeController extends Controller
 {
@@ -24,7 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $mopol = Mopol::all();
-        return view('home')->withMopol($mopol);
+          return view('home');
     }
 }

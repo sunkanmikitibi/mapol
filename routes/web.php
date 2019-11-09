@@ -19,4 +19,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('mopol', 'MopolController');
+Route::group(['prefix' => 'admin'], function() {
+ Route::get('/home', 'HomeController@index')->name('home');
+ Route::resource('mopol', 'MopolController');
+Route::resource('officers', 'OfficerController');
+Route::resource('users', 'UsersController');
+
+});
+

@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Session;
+use Alert;
+use Auth;
 use App\Mopo as Mopol;
 
 class MopolController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +22,9 @@ class MopolController extends Controller
      */
     public function index()
     {
-        //
+        $armouryrecords = Mopol::all();
+        return view('armouryrecords.index')->withMopol($armouryrecords);
+
     }
 
     /**
@@ -25,7 +34,7 @@ class MopolController extends Controller
      */
     public function create()
     {
-        return view('mopolform');
+        return view('armouryrecords.create');
     }
 
     /**
@@ -37,7 +46,6 @@ class MopolController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'serialno'=>'required',
             'APFN'=>'required',
             'rank'=>'required',
             'names'=>'required',
@@ -49,25 +57,22 @@ class MopolController extends Controller
         ]);
 
         $mopol = new Mopol;
-        $mopol->serialno = $request->serialno;
         $mopol->APFN = $request->APFN;
         $mopol->rank = $request->rank;
         $mopol->names = $request->names;
         $mopol->duty_post = $request->duty_post;
         $mopol->arms_serial_no = $request->arms_serial_no;
         $mopol->make = $request->make;
+        $mopol->user_id = $request->user_id;
         $mopol->breach_number = $request->breach_number;
         $mopol->armournation_stock = $request->armournation_stock;
 
         $mopol->save();
+        Alert::success('Success', 'Record created Successfully');
 
         $request->session()->flash('success', 'Record created Successfully');
-        return redirect()->route('home');
+        return redirect()->route('mopol.index');
 
-
-
-
-        //dd($request->all());
     }
 
     /**
@@ -79,7 +84,7 @@ class MopolController extends Controller
     public function show($id)
     {
        $mopol = Mopol::find($id);
-       return view('mopolshow')->withMopo($mopol);
+       return view('armouryrecords.show')->withMopo($mopol);
     }
 
     /**
@@ -91,7 +96,7 @@ class MopolController extends Controller
     public function edit($id)
     {
         $mopol = Mopol::find($id);
-        return view('mopoledit')->withMopo($mopol);
+        return view('armouryrecords.edit')->withMopo($mopol);
     }
 
     /**
@@ -124,13 +129,14 @@ class MopolController extends Controller
         $mopol->duty_post = $request->input('duty_post');
         $mopol->arms_serial_no = $request->input('arms_serial_no');
         $mopol->make = $request->input('make');
+        $mopol->user_id = $request->input('user_id');
         $mopol->breach_number = $request->input('breach_number');
         $mopol->armournation_stock = $request->input('armournation_stock');
 
         $mopol->save();
 
         $request->session()->flash('success', 'Record Updated Successfully');
-        return redirect()->route('home');
+        return redirect()->route('mopol.index');
 
 
 
@@ -148,6 +154,6 @@ class MopolController extends Controller
         $mopol = Mopol::find($id);
         $mopol->delete();
         $request->session()->flash('Success', 'Deleted Successfully');
-        return redirect()->route('home');
+        return redirect()->route('mopol.index');
     }
 }

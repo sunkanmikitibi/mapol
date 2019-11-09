@@ -78,13 +78,35 @@
             @endif --}}
 
             <div class="content">
-                <div class="logo_area mb-3">
-                    <img src="img/logo.jpg" alt="mopol">
-                </div>
+                <table class="table">
+                    <tr>
+                        <td>  <div class="logo_area mb-3">
+                                <img src="img/logo.jpg" alt="mopol">
+                            </div>
+            </td>
+            <td>
+                    <div class="logo_area mb-3">
+                            <img src="img/mapollogo.png" alt="mopol">
+                        </div>
+
+            </td>
+                    </tr>
+                </table>
 
 
                <div class="login_button">
-                   <a href="{{ route('login')}}" class="btn btn-primary btn-block btn-lg">Login</a>
+
+                   @if (Route::has('login'))
+                       @auth
+                      <a href="{{route('home')}}" class="btn btn-md btn-success">
+                            Go to dashboard
+                      </a>
+                       @else
+                       <a href="{{ route('login')}}" class="btn btn-primary btn-block btn-lg">Login</a>
+                       @endauth
+                   @endif
+
+
                </div>
             </div>
         </div>

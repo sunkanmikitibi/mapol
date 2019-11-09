@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
 <div class="container">
 
     <div class="row">
         <div class="col-md-10">
-            <div class="card">
+            <div class="card card-primary">
                 <div class="card-header donot">
                  Dashboard
                    </div>
@@ -21,48 +21,14 @@
                                 </div>
 
                                 <div class="col-md-2">
-                                        <img src="{{ asset('img/logo.jpg')}}" class="logo" alt="Police logo" srcset="">
+                                        <img src="{{ asset('img/mapollogo.png')}}" class="logo" alt="Police logo" srcset="">
                                     </div>
 
                             </div>
-                            <div class="row">
+                            <div class="row table-responsive">
                                 <div class="col-md-12">
 
-                                    <table class="table table-bordered table-dark table-striped">
-                                       <thead>
-                                           <tr>
-                                         <th>S/No</th>
-                                        <th>AP/FN</th>
-                                        <th>Rank</th>
-                                        <th>Names</th>
-                                        <th>Duty Post</th>
-                                        <th></th>
-                                           </tr>
-                                       </thead>
-                                       <tbody>
 
-                                           @foreach ($mopol as $record)
-                                            <tr>
-                                               <td>{{$record->serialno}}</td>
-                                               <td>{{$record->APFN}}</td>
-                                               <td>{{$record->rank}}</td>
-                                               <td>{{$record->names}}</td>
-                                               <td>{{$record->duty_post}}</td>
-                                               <td align="center"> <a class="btn btn-sm btn-primary donot" href="{{route('mopol.show', $record->id)}}">
-                                                   <i class="fa fa-eye"></i> view
-                                                </a>
-                                                 <a class="btn btn-sm btn-warning donot" href="{{ route('mopol.edit', $record->id) }}">
-                                                        <i class="fa fa-edit"></i> edit
-                                                    </a>
-
-                                                      </td>
-
-                                           </tr>
-                                           @endforeach
-
-
-                                       </tbody>
-                                    </table>
                                 </div>
                             </div>
 
@@ -76,17 +42,10 @@
                             Menu
 
                         </div>
-                        <div class="card-body">
-                            <ul class="nav navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/home">Dashboard</a> </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('mopol.create')}}">Create Record</a>
-                                </li>
-                            </ul>
-                        </div>
+
                     </div>
 
+                  {{--
                     <div class="card">
                         <div class="card-header">
                             Action
@@ -98,7 +57,9 @@
                     </button>
                         </div>
                     </div>
+                    --}}
         </div>
     </div>
 </div>
 @endsection
+

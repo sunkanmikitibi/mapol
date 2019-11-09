@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'username', 'email', 'password', 'type',
     ];
 
     /**
@@ -24,6 +24,13 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+     public function records()
+     {
+         return $this->hasMany('App\Mopo');
+     }
+
+
     protected $hidden = [
         'password', 'remember_token',
     ];

@@ -15,13 +15,13 @@ class CreateMoposTable extends Migration
     {
         Schema::create('mopos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('serialno')->unsigned();
             $table->string('APFN');
             $table->string('rank');
             $table->string('names');
             $table->string('duty_post');
             $table->string('arms_serial_no')->nullable();
             $table->string('make')->nullable();
+            $table->unsignedInteger('user_id');
             $table->string('breach_number')->nullable();
             $table->string('armournation_stock')->nullable();
             $table->timestamps();
