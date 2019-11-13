@@ -53,21 +53,39 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="{{ route('home') }}">Dashboard <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{ route('home') }}">
+                                    <i class="fa fa-cogs"></i> Dashboard <span class="sr-only">(current)</span></a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" href="{{ route('officers.index') }}">Officers</a>
+                              @can('admin', auth()->user())
+                              <a class="nav-link" href="{{ route('officers.index') }}">
+                                <i class="fa fa-users"></i>
+                                Officers</a>
+                              @elsecan('superadmin', auth()->user())
+                              <a class="nav-link" href="{{ route('officers.index') }}">
+                                    <i class="fa fa-users"></i> Officers</a>
+                              @endcan
+
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" href="{{ route('mopol.index') }}">Armoury Records</a>
+                              @can('superadmin', auth()->user())
+                              <a class="nav-link" href="{{ route('mopol.index') }}">
+                                    <i class="fa fa-list"></i>
+                                    Armoury Records</a>
+                              @elsecan('user', auth()->user())
+                              <a class="nav-link" href="{{ route('mopol.index') }}">   <i class="fa fa-list"></i> Armoury Records</a>
+                              @endcan
+
                           </li>
+                          <li class="nav-item"><a href="{{ route('support-tickets.index')}}" class="nav-link"> <i class="fa fa-question-circle"></i> Support</a></li>
+
                           @can('admin', auth()->user())
                           <li class="nav-item">
-                                <a class="nav-link" href="{{ route('users.index')}}">Users</a>
+                                <a class="nav-link" href="{{ route('users.index')}}">   <i class="fa fa-users"></i> Users</a>
                               </li>
                           @elsecan('superadmin', auth()->user())
                           <li class="nav-item">
-                                <a class="nav-link" href="{{ route('users.index')}}">Users</a>
+                                <a class="nav-link" href="{{ route('users.index')}}">   <i class="fa fa-users"></i> Users</a>
                               </li>
                           @endcan
 

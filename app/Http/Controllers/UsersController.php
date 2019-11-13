@@ -10,6 +10,11 @@ use App\User;
 
 class UsersController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -52,8 +57,8 @@ class UsersController extends Controller
         //Validate Form Input
         if(Gate::allows('admin' || 'superadmin', auth()->user())) {
             $this->validate($request, [
-                'name' => 'required|string|max:20',
-                'username' => 'required|string|max:15',
+                'name' => 'required|string|max:20|min:3',
+                'username' => 'required|string|max:15|min:3',
                 'email' => 'required|email',
                 'type'=>'required|string',
                 'password' => 'required',
@@ -98,7 +103,15 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(Gate::allows('superadmin', auth()->user())) {
+                $user = User::findOrFail($id);
+                return view('users.edit')->withUser($user);
+        }else if(Gate::allows('admin', auth()->user())) {
+            $user = User::findOrFail($id);
+            return view('users.edit')->withUser($user);
+        } else  {
+            return view('unauthorized');
+        }
     }
 
     /**
@@ -110,7 +123,28 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $this->validate($request, [
+            'name'=>'sometimes|max:20|min:3',
+            'username'=>'sometimes|max:15|min:3',
+            'email'=>'sometimes|email',
+            'type'=>'sometimes|string',
+            'password'=>'sometimes',
+        ]);
+
+        $user = User::find($id);
+
+        $user->name = $request->input('name');
+        $user->username = $request->input('username');
+        $user->email = $request->input('email');
+        $user->type = $request->input('type');
+        $user->password = Hash::make($request->input('password'));
+
+        $user->save();
+
+        Session::flash('success', 'User Records Updated');
+        return redirect()->route('users.index');
+
     }
 
     /**

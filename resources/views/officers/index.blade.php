@@ -90,7 +90,10 @@
                                                         {{$officer->ap_no}}
                                                     </td>
                                                     <td>
-                                                        {{$officer->surname}} {{$officer->firstname}}
+                                                        <a href="{{ route('officers.edit', $officer->id) }}">
+                                                                {{$officer->surname}} {{$officer->firstname}}
+                                                        </a>
+
                                                     </td>
                                                     <td>
                                                             {{$officer->substantive_rank}}

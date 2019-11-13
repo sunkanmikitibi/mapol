@@ -24,6 +24,7 @@ class CreateMoposTable extends Migration
             $table->unsignedInteger('user_id');
             $table->string('breach_number')->nullable();
             $table->string('armournation_stock')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

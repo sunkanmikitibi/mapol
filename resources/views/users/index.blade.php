@@ -33,11 +33,23 @@
                                     </td>
                                     <td>{{ $user->name }}</td>
                                     <td> {{ $user->email }}</td>
-                                    <td> {{ $user->type }}</td>
+                                    <td>
+
+
+                                    @if ($user->type=='admin')
+                                        Administrator
+                                    @elseif ($user->type == 'superadmin')
+                                        Super Administrator
+                                        @else
+                                        Armoury User
+                                    @endif
+
+
+                                      </td>
                                     <td> {{ date('M, d Y', strtotime($user->created_at)) }}</td>
                                     <td>
 
-                                    <a href="" class="btn btn-sm btn-warning btn-md">
+                                    <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-warning btn-md">
                                             <i class="fa fa-edit"></i>
                                     </a>
                                     </td>

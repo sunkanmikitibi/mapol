@@ -24,6 +24,8 @@ Route::group(['prefix' => 'admin'], function() {
  Route::resource('mopol', 'MopolController');
 Route::resource('officers', 'OfficerController');
 Route::resource('users', 'UsersController');
+Route::resource('support-tickets', 'TicketsController');
+Route::resource('category', 'CategoryController');
 
 });
 

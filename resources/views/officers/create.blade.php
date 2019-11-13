@@ -299,14 +299,12 @@
     </div>
 
     <div class="row">
-        <div class="col-6">
 
-        </div>
-        <div class="col-6">
+        <div class="col-6 offset-3">
 
                 <button type="submit" class="btn btn-primary btn-xs">
                         <i class="fa fa-user-plus fa-fw"></i>
-                        Add New Officer
+                        Create New Officer Record
                     </button>
         </div>
     </div>
