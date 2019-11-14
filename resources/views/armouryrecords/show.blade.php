@@ -1,5 +1,5 @@
 
-@extends('layouts.app')
+@extends('layouts.app2')
 @section('styles')
     @include('partials._styles')
 @endsection

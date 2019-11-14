@@ -26,7 +26,7 @@
                           </a></div>
                     @endcan
 
-                    <h4 class="card-title">Officers ({{$officers->count()}})</h4>
+                    <strong>Officers</strong>  <small>({{$officers->count()}})</small>
 
                 </div>
                 <div class="card-body">
@@ -47,21 +47,13 @@
 
                     <div class="row">
                         <div class="col-12">
-                                <table class="table table-bordered table-striped table-responsive table-condensed" width="100%" id="exampleButtons">
+                                <table class="table table-bordered table-striped table-responsive table-responsive-md table-condensed" width="100%" id="exampleButtons">
                                         <thead>
                                             <tr class="bg-dark text-white text-capitalize">
-                                               <th>
-                                                AP/FN
-                                            </th>
-                                            <th>
-                                                Name
-                                            </th>
-                                            <th>
-                                                Rank
-                                            </th>
-                                            <th>
-                                                State
-                                            </th>
+                                              <th> AP/FN </th>
+                                              <th> Name </th>
+                                              <th>Rank </th>
+                                              <th>State</th>
                                             <th>Lga</th>
                                             <th>
                                                 Tribe
@@ -79,6 +71,7 @@
                                             <th>Date Trans. to division </th>
                                             <th>command tran from </th>
                                             <th>Edu qual.</th>
+                                            <th></th>
                                             </tr>
 
                                         </thead>
@@ -127,6 +120,9 @@
                                                     </td>
                                                     <td>
                                                         {{ $officer->education_qualification}}
+                                                    </td>
+                                                    <td>
+                                                       <a href="{{ route('officers.show', $officer->id)}}"> <i class="fa fa-camera"></i></a>
                                                     </td>
 
                                             </tr>

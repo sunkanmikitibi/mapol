@@ -57,11 +57,11 @@
                         {!! Form::open(['route'=>'support-tickets.store', 'method'=>'POST']) !!}
                         <div class="form-group">
                             {!! Form::text('title', null, ['class'=>'form-control form-control-sm', 'placeholder'=>'Ticket Title']) !!}
-                            @if ($errors->has('title'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('title') }}</strong>
-                            </span>
-                        @endif
+                        <small> @if ($errors->has('title'))
+                                <span class="help-block text-danger">
+                                    <strong>{{ $errors->first('title') }}</strong>
+                                </span>
+                            @endif</small>
                         </div>
                         <div class="form-group">
                             <select name="category_id" id="" class="form-control form-control-sm">
@@ -70,13 +70,18 @@
                                 <option value="{{$cat->id}}">{{ $cat->name}} </option>
                                 @endforeach
                             </select>
-                            @if ($errors->has('category_id'))
-                            <span class="help-block">
+                           <small>
+                                @if ($errors->has('category_id'))
+                            <span class="help-block text-danger">
                                 <strong>{{ $errors->first('category_id') }}</strong>
                             </span>
                         @endif
+                        </small>
                         </div>
                         <div class="form-group">
+
+                            {!! Form::hidden('sender_id', Auth::user()->id) !!}
+
                             {!! Form::select('priority', ['low'=>'Low', 'medium'=>'Medium', 'high'=>'High', 'very-urgent'=>'Very urgent'], null, ['class'=>'form-control form-control-sm', 'placeholder'=>'Select Priority']) !!}
                             @if ($errors->has('priority'))
                             <span class="help-block">
@@ -86,11 +91,13 @@
                         </div>
                         <div class="form-group">
                             {!! Form::textarea('message', null, ['class'=>'form-control form-control-sm']) !!}
-                            @if ($errors->has('message'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('message') }}</strong>
-                            </span>
-                        @endif
+                         <small>
+                                @if ($errors->has('message'))
+                                <span class="help-block text-danger">
+                                    <strong>{{ $errors->first('message') }}</strong>
+                                </span>
+                            @endif
+                             </small>
                         </div>
                         <div class="form-group">
 

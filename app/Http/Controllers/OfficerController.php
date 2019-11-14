@@ -159,7 +159,8 @@ class OfficerController extends Controller
      */
     public function show($id)
     {
-        //
+        $officer = Officer::find($id);
+        return view('officers.show', compact('officer'));
     }
 
     /**
@@ -275,6 +276,9 @@ class OfficerController extends Controller
 
         $officer->save();
 
+        Session::flash('success', 'Officer Record Updated Successfully');
+        return redirect()->route('officers.index');
+
 
     }
 
@@ -286,6 +290,13 @@ class OfficerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $officer = Officer::find($id);
+        $officer->delete();
+
+        Session::flash('success', 'Record Deleted');
+        return redirect()->route('officers.index');
+
+
+
     }
 }
