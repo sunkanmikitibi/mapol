@@ -25,6 +25,17 @@ class User extends Authenticatable
      * @var array
      */
 
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+
      public function records()
      {
          return $this->hasMany('App\Mopo');

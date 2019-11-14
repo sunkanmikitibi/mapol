@@ -14,6 +14,16 @@ class Ticket extends Model
         return $this->belongsTo('App\Category');
     }
 
+    public function comments()
+{
+    return $this->hasMany(Comment::class);
+}
+
+public function user()
+{
+    return $this->belongsTo(User::class);
+}
+
     protected $dates = ['deleted_at'];
 
    protected $fillable = [
